@@ -1,6 +1,6 @@
 // Copyright 2014 Vladimir Alyamkin. All Rights Reserved.
 
-#include "VaQuoleUILib.h"
+#include "../Include/VaQuoleUILib.h"
 #include "VaQuoleAppThread.h"
 
 #include <QApplication>
@@ -400,9 +400,9 @@ void VaQuoleWebUI::InputMouse(int X, int Y, VaQuole::EMouseButton::Type Button,
 	Event.bButtonPressed = bMouseDown;
 
 	// Prepare modifiers
-	Modifiers.bAltDown == true ? Event.modifiers |= Qt::AltModifier : 0;
-	Modifiers.bCtrlDown == true ? Event.modifiers |= Qt::ControlModifier : 0;
-	Modifiers.bShiftDown == true ? Event.modifiers |= Qt::ShiftModifier : 0;
+	if(Modifiers.bAltDown) Event.modifiers |= Qt::AltModifier;
+	if(Modifiers.bCtrlDown) Event.modifiers |= Qt::ControlModifier;
+	if(Modifiers.bShiftDown) Event.modifiers |= Qt::ShiftModifier;
 
 	// Convert button from UE4 to Qt enum value
 	switch (Button)
@@ -461,9 +461,9 @@ void VaQuoleWebUI::InputKey(const TCHAR *Key,
 	Event.bKeyPressed = bPressed;
 
 	// Prepare modifiers
-	Modifiers.bAltDown == true ? Event.modifiers |= Qt::AltModifier : 0;
-	Modifiers.bCtrlDown == true ? Event.modifiers |= Qt::ControlModifier : 0;
-	Modifiers.bShiftDown == true ? Event.modifiers |= Qt::ShiftModifier : 0;
+	if(Modifiers.bAltDown) Event.modifiers |= Qt::AltModifier;
+	if(Modifiers.bCtrlDown) Event.modifiers |= Qt::ControlModifier;
+	if(Modifiers.bShiftDown) Event.modifiers |= Qt::ShiftModifier;
 
 	// Prepare key
 	QString KeyStr = QString::fromUtf16((const ushort*)Key);

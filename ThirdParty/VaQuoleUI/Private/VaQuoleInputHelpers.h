@@ -3,7 +3,7 @@
 #ifndef VAQUOLEINPUTHELPERS_H
 #define VAQUOLEINPUTHELPERS_H
 
-#include "VaQuolePublicPCH.h"
+#include "../Include/VaQuolePublicPCH.h"
 
 #include <QEvent>
 #include <QString>
@@ -30,7 +30,7 @@ struct MouseEvent
 	bool bScrollUp;
 	bool bScrollDown;
 
-	MouseEvent::MouseEvent()
+	MouseEvent()
 	{
 		button = Qt::NoButton;
 		modifiers = Qt::NoModifier;
@@ -48,7 +48,7 @@ struct KeyEvent
 	bool bKeyPressed;
 	QString text;
 
-	KeyEvent::KeyEvent()
+	KeyEvent()
 	{
 		key = Qt::Key_unknown;
 		modifiers = Qt::NoModifier;
@@ -94,16 +94,16 @@ void simulateContextMenu(	QWidget* const pWidget,
 QKeyEvent* createKeyEvent(	const QEvent::Type eventType,
 							const int key,
 							const Qt::KeyboardModifiers modifiers,
-							QString & text = QString(),
-							bool autorep = false,
-							ushort count = 1);
+							QString & text,
+							bool autorep,
+							ushort count);
 
 /** Attn.! Obsolete - QtTest used instead */
 void simulateKey(	QWidget* const pWidget,
 					const unsigned int key,
 					const Qt::KeyboardModifiers modifiers,
-					QString & text = QString(),
-					const bool bKeyPressed = true);
+					QString & text,
+					const bool bKeyPressed);
 
 
 } // namespace VaQuole

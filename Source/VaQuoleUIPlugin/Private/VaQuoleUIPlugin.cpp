@@ -2,7 +2,7 @@
 
 #include "VaQuoleUIPluginPrivatePCH.h"
 
-class FVaQuoleUIPlugin : public IVaQuoleUIPlugin
+class VAQUOLEUIPLUGIN_API FVaQuoleUIPlugin : public IVaQuoleUIPlugin
 {
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override

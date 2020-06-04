@@ -23,7 +23,10 @@ namespace ESurfaceMapping
 UCLASS(ClassGroup=UI, editinlinenew, meta=(BlueprintSpawnableComponent))
 class VAQUOLEUIPLUGIN_API UVaQuoleSceneUIComponent : public UVaQuoleUIComponent
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
+
+public:
+	UVaQuoleSceneUIComponent();
 
 	// Begin UObject Interface
 	virtual void BeginDestroy() override;

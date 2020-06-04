@@ -1,7 +1,7 @@
 // Copyright 2014 Vladimir Alyamkin. All Rights Reserved.
 
 #include "VaQuoleAppThread.h"
-#include "VaQuoleUILib.h"
+#include "../Include/VaQuoleUILib.h"
 #include "VaQuoleWebPage.h"
 
 #include <QApplication>
@@ -63,7 +63,11 @@ void VaQuoleUIManager::run()
 	if (QApplication::instance() == nullptr)
 	{
 		int argc = 1;
-		char *argv[] = { "VaQuoleApp" };
+		//char* argv[] = { "VaQuoleApp" };
+		char* argv[2];
+		argv[0] = new char[100];
+		strcpy_s(argv[0], 100, "VaQuoleApp");
+		argv[1] = nullptr;
 
 #ifdef VA_DEBUG
 		qInstallMessageHandler(myMessageOutput);

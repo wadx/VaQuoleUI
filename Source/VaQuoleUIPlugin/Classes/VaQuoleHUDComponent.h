@@ -11,8 +11,11 @@
 UCLASS(ClassGroup=UI, editinlinenew, meta=(BlueprintSpawnableComponent))
 class VAQUOLEUIPLUGIN_API UVaQuoleHUDComponent : public UVaQuoleUIComponent
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
 
+	UVaQuoleHUDComponent();
+
+public:
 	// Begin UActorComponent Interface
 	virtual void InitializeComponent() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;

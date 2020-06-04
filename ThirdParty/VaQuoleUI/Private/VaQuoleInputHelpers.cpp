@@ -155,11 +155,11 @@ void simulateKey(	QWidget* const pWidget,
 
 	if(bKeyPressed)
 	{
-		pKeyEvent = createKeyEvent(QEvent::KeyPress, key, modifiers, text);
+		pKeyEvent = createKeyEvent(QEvent::KeyPress, key, modifiers, text, false, 1);
 	}
 	else
 	{
-		pKeyEvent = createKeyEvent(QEvent::KeyRelease, key, modifiers, text);
+		pKeyEvent = createKeyEvent(QEvent::KeyRelease, key, modifiers, text, false, 1);
 	}
 
 	QApplication::instance()->sendEvent(pWidget, pKeyEvent);

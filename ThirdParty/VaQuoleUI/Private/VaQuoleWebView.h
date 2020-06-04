@@ -3,7 +3,7 @@
 #ifndef VAQUOLEWEBVIEW_H
 #define VAQUOLEWEBVIEW_H
 
-#include "VaQuolePublicPCH.h"
+#include "../Include/VaQuolePublicPCH.h"
 
 #include <QWebView>
 

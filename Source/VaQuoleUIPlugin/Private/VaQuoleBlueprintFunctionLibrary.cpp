@@ -1,12 +1,7 @@
 // Copyright 2014 Vladimir Alyamkin. All Rights Reserved.
 
+#include "VaQuoleBlueprintFunctionLibrary.h"
 #include "VaQuoleUIPluginPrivatePCH.h"
-
-UVaQuoleBlueprintFunctionLibrary::UVaQuoleBlueprintFunctionLibrary(const class FPostConstructInitializeProperties& PCIP)
-	: Super(PCIP)
-{
-
-}
 
 bool UVaQuoleBlueprintFunctionLibrary::ActorHasWebUI(UObject* WorldContextObject, const AActor *Actor, UVaQuoleUIComponent*& WebUI)
 {

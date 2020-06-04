@@ -8,7 +8,10 @@
 UCLASS()
 class VAQUOLEUIPLUGIN_API UVaQuoleUIViewportClient : public UGameViewportClient
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
+
+public:
+	UVaQuoleUIViewportClient();
 
 	/** Register UI component as a HUD UI */
 	void RegisterHudUI(UVaQuoleUIComponent* WebView);
@@ -23,7 +26,8 @@ class VAQUOLEUIPLUGIN_API UVaQuoleUIViewportClient : public UGameViewportClient
 	void UnregisterSceneUI(UVaQuoleUIComponent* WebView);
 
 	// FViewportClient interface.
-	virtual bool InputKey(FViewport* Viewport, int32 ControllerId, FKey Key, EInputEvent EventType, float AmountDepressed = 1.f, bool bGamepad = false) override;
+	//virtual bool InputKey(FViewport* Viewport, int32 ControllerId, FKey Key, EInputEvent EventType, float AmountDepressed = 1.f, bool bGamepad = false) override;
+	bool InputKey(const FInputKeyEventArgs& EventArgs) override;
 	// End of FViewportClient interface.
 
 private:

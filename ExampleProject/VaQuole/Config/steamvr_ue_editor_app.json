@@ -1,0 +1,18 @@
+{
+	"source": "UE",
+	"applications": [
+		{
+			"app_key": "application.generated.ue.third-person-game-template-11590370.ue4editor-win64-debuggame.exe",
+			"launch_type": "url",
+			"url": "steam://launch/",
+			"action_manifest_path": "D:/Unreal Engine/Epic Games/VaQuole/Config/SteamVRBindings/steamvr_manifest.json",
+			"strings":
+			{
+				"en_us":
+				{
+					"name": "Third Person Game Template-11590370 [UE Editor]"
+				}
+			}
+		}
+	]
+}

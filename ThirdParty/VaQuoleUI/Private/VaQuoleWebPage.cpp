@@ -13,19 +13,19 @@ VaQuoleWebPage::VaQuoleWebPage(QObject *parent) :
 
 }
 
-QString	VaQuoleWebPage::chooseFile(QWebFrame * parentFrame, const QString & suggestedFile)
+QString	VaQuoleWebPage::chooseFile(QWebFrame*, const QString & suggestedFile)
 {
 	qDebug() << "chooseFile:" << suggestedFile;
 
 	return suggestedFile;
 }
 
-void VaQuoleWebPage::javaScriptAlert(QWebFrame * frame, const QString & msg)
+void VaQuoleWebPage::javaScriptAlert(QWebFrame*, const QString & msg)
 {
 	qDebug() << "JsAlert:" << msg;
 }
 
-bool VaQuoleWebPage::javaScriptConfirm(QWebFrame * frame, const QString & msg)
+bool VaQuoleWebPage::javaScriptConfirm(QWebFrame*, const QString&)
 {
 	return false;
 }
@@ -35,7 +35,7 @@ void VaQuoleWebPage::javaScriptConsoleMessage(const QString & message, int lineN
 	qDebug() << "JsConsole [" << lineNumber << "] [" << sourceID << "]:" << message;
 }
 
-bool VaQuoleWebPage::javaScriptPrompt(QWebFrame * frame, const QString & msg, const QString & defaultValue, QString * result)
+bool VaQuoleWebPage::javaScriptPrompt(QWebFrame*, const QString&, const QString&, QString*)
 {
 	return false;
 }

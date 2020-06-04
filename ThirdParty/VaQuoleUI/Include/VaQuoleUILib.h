@@ -8,6 +8,7 @@
 #include <mutex>
 #include <vector>
 
+
 namespace VaQuole
 {
 
@@ -62,7 +63,7 @@ public:
 	TCHAR* EvaluateJavaScript(const TCHAR *ScriptSource);
 
 	/** Get reference to grabbed screen texture */
-	const uchar * GrabView();
+	const uchar* GrabView();
 
 	/** Is the view grabbed bits update enabled? */
 	bool IsEnabled();

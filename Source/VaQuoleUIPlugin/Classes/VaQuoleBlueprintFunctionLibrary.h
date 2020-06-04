@@ -13,8 +13,9 @@ class UVaQuoleUIComponent;
 UCLASS(ClassGroup=UI)
 class VAQUOLEUIPLUGIN_API UVaQuoleBlueprintFunctionLibrary : public UBlueprintFunctionLibrary
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
 
+public:
 	/**
 	 * Checks if the actor has WebUI component
 	 *

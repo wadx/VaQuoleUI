@@ -2,8 +2,7 @@
 
 #include "VaQuoleUIPluginPrivatePCH.h"
 
-UVaQuoleHUDComponent::UVaQuoleHUDComponent(const class FPostConstructInitializeProperties& PCIP)
-	: Super(PCIP)
+UVaQuoleHUDComponent::UVaQuoleHUDComponent()
 {
 	bEnabled = true;
 	bTransparent = true;

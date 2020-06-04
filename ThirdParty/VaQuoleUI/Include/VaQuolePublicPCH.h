@@ -44,7 +44,8 @@ struct KeyModifiers
 	bool bAltDown;
 
 	/** Defaults **/
-	KeyModifiers::KeyModifiers()
+	//KeyModifiers::KeyModifiers()
+	KeyModifiers()
 	{
 		bShiftDown = false;
 		bCtrlDown = false;

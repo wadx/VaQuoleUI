@@ -2,8 +2,7 @@
 
 #include "VaQuoleUIPluginPrivatePCH.h"
 
-UVaQuoleSceneUIComponent::UVaQuoleSceneUIComponent(const class FPostConstructInitializeProperties& PCIP)
-	: Super(PCIP)
+UVaQuoleSceneUIComponent::UVaQuoleSceneUIComponent()
 {
 	bEnabled = false;
 	bTransparent = false;
@@ -80,7 +79,7 @@ bool UVaQuoleSceneUIComponent::MouseMoveFromHitResult(const FHitResult& HitResul
 	UStaticMeshComponent* TargetMesh = Owner->FindComponentByClass<UStaticMeshComponent>();
 	if (TargetMesh != NULL)
 	{
-		FTransform ToActor = HitResult.Actor->GetTransform().InverseSafe();
+		FTransform ToActor = HitResult.Actor->GetTransform().Inverse();
 		FVector ActorImpact = ToActor.TransformPosition(HitResult.ImpactPoint);
 
 		FVector Min, Max;

@@ -2,8 +2,7 @@
 
 #include "VaQuoleUIPluginPrivatePCH.h"
 
-UVaQuoleUIComponent::UVaQuoleUIComponent(const class FPostConstructInitializeProperties& PCIP)
-	: Super(PCIP)
+UVaQuoleUIComponent::UVaQuoleUIComponent()
 {
 	bAutoActivate = true;
 	bWantsInitializeComponent = true;
@@ -151,7 +150,9 @@ void UVaQuoleUIComponent::UpdateUITexture()
 		// Check that texture is prepared
 		auto rhiRef = static_cast<FTexture2DResource*>(Texture->Resource)->GetTexture2DRHI();
 		if (!rhiRef)
+		{
 			return;
+		}
 
 		// Load data from view
 		const UCHAR* my_data = WebUI->GrabView();
@@ -159,7 +160,7 @@ void UVaQuoleUIComponent::UpdateUITexture()
 
 		// @TODO This is a bit heavy to keep reallocating/deallocating, but not a big deal. Maybe we can ping pong between buffers instead.
 		TArray<uint32> ViewBuffer;
-		ViewBuffer.Init(Width * Height);
+		ViewBuffer.Init(0, Width * Height);
 		FMemory::Memcpy(ViewBuffer.GetData(), my_data, size);
 
 		// This will be passed off to the render thread, which will delete it when it has finished with it
@@ -168,25 +169,20 @@ void UVaQuoleUIComponent::UpdateUITexture()
 
 		// Cleanup
 		ViewBuffer.Empty();
-		my_data = 0;
+		my_data = nullptr;
 
-		ENQUEUE_UNIQUE_RENDER_COMMAND_THREEPARAMETER(
-			UpdateVaQuoleTexture,
-			FVaQuoleTextureDataPtr, ImageData, DataPtr,
-			FTexture2DRHIRef, TargetTexture, rhiRef,
-			const size_t, DataSize, size,
-		{
-			uint32 stride = 0;
-			void* MipData = GDynamicRHI->RHILockTexture2D(TargetTexture, 0, RLM_WriteOnly, stride, false);
-
-			if (MipData)
+		ENQUEUE_RENDER_COMMAND(CopyTextureData)
+		(
+			[TargetTexture = rhiRef, ImageData = DataPtr](FRHICommandListImmediate& RHICmdList) mutable
 			{
+				check(IsInRenderingThread());
+				uint32 stride = 0;
+				uint8* MipData = static_cast<uint8*>(RHILockTexture2D(TargetTexture, 0, RLM_WriteOnly, stride, false));
 				FMemory::Memcpy(MipData, ImageData->GetRawBytesPtr(), ImageData->GetDataSize());
-				GDynamicRHI->RHIUnlockTexture2D(TargetTexture, 0, false);
+				RHIUnlockTexture2D(TargetTexture, 0, false);
+				ImageData.Reset();
 			}
-
-			ImageData.Reset();
-		});
+		);
 	}
 }
 
@@ -369,7 +365,7 @@ void UVaQuoleUIComponent::OpenURL(const FString& URL)
 
 	if (URL.Contains(TEXT("vaquole://"), ESearchCase::IgnoreCase, ESearchDir::FromStart))
 	{
-		FString GameDir = FPaths::ConvertRelativePathToFull(FPaths::GameDir());
+		FString GameDir = FPaths::ConvertRelativePathToFull(FPaths::ProjectDir());
 		FString LocalFile = URL.Replace(TEXT("vaquole://"), *GameDir, ESearchCase::IgnoreCase);
 		LocalFile = FString(TEXT("file:///")) + LocalFile;
 
@@ -493,8 +489,8 @@ bool UVaQuoleUIComponent::InputKey(FViewport* Viewport, int32 ControllerId, FKey
 	}
 	else
 	{
-		const uint16 *KeyCode = 0;
-		const uint16 *CharCode = 0;
+		const uint32 *KeyCode = 0;
+		const uint32 *CharCode = 0;
 		FInputKeyManager::Get().GetCodesFromKey(Key, KeyCode, CharCode);
 
 		// Mark non-unicode characters with -1
@@ -547,8 +543,7 @@ bool UVaQuoleUIComponent::GetMouseScreenPosition(FVector2D& MousePosition)
 #if PLATFORM_DESKTOP
 	if (GEngine && GEngine->GameViewport)
 	{
-		MousePosition = GEngine->GameViewport->GetMousePosition();
-		return true;
+		return GEngine->GameViewport->GetMousePosition(MousePosition);
 	}
 #endif
 

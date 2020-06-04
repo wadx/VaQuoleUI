@@ -3,7 +3,7 @@
 #ifndef VAQUOLEAPPTHREAD_H
 #define VAQUOLEAPPTHREAD_H
 
-#include "VaQuolePublicPCH.h"
+#include "../Include/VaQuolePublicPCH.h"
 #include "VaQuoleWebView.h"
 #include "VaQuoleInputHelpers.h"
 
@@ -65,7 +65,7 @@ struct UIDataKeeper
 	QList< QPair<QString, QString> > ScriptEvents;		// Event, Message
 
 	/** Defaults */
-	UIDataKeeper::UIDataKeeper()
+	UIDataKeeper()
 		: ObjectId(QUuid::createUuid().toString())
 	{
 		bEnabled = false;

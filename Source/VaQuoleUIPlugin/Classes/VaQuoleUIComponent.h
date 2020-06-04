@@ -57,7 +57,7 @@ struct FVaQuoleTextureData
 	const TArray<uint32>& GetRawBytes() const { return Bytes; }
 
 	/** Accesses the raw bytes of already sized texture data */
-	uint32* GetRawBytesPtr() { return Bytes.GetTypedData(); }
+	uint32* GetRawBytesPtr() { return Bytes.GetData(); }
 
 private:
 	/** Raw uncompressed texture data */
@@ -88,7 +88,10 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLoadFinished);
 UCLASS(Abstract, BlueprintType, Blueprintable)
 class VAQUOLEUIPLUGIN_API UVaQuoleUIComponent : public UActorComponent
 {
-	GENERATED_UCLASS_BODY()
+	GENERATED_BODY()
+
+public:
+	UVaQuoleUIComponent();
 
 	// Begin UActorComponent Interface
 	virtual void InitializeComponent() override;
