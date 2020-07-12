@@ -1,5 +1,6 @@
 // Copyright 2014 Vladimir Alyamkin. All Rights Reserved.
 
+#include "VaQuoleHUDComponent.h"
 #include "VaQuoleUIPluginPrivatePCH.h"
 
 UVaQuoleHUDComponent::UVaQuoleHUDComponent()
